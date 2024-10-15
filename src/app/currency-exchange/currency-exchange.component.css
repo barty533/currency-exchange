@@ -1,0 +1,11 @@
+.drop-down__scroll-container {
+    display: flex;
+    flex-direction: column;
+     background-color: beige;
+     height: 200px;
+     width: 120px;
+     overflow: auto;
+ }
+ .igx-overlay{
+     height: 20px;
+ }

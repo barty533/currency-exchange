@@ -1,0 +1,13 @@
+<button igxButton="contained" 
+        [igxToggleAction]="dropdown" 
+        [igxDropDownItemNavigation]="dropdown">
+        Base Currency
+</button>
+<igx-drop-down #dropdown [width]="'240px'">
+    <div class="drop-down__scroll-container">
+    <igx-drop-down-item *ngFor="let item of items">
+        {{ item }}
+    </igx-drop-down-item>
+    </div>
+</igx-drop-down>
+
