@@ -1,3 +1,4 @@
+
 <button igxButton="contained" 
         [igxToggleAction]="dropdown" 
         [igxDropDownItemNavigation]="dropdown">
@@ -6,8 +7,28 @@
 <igx-drop-down #dropdown [width]="'240px'">
     <div class="drop-down__scroll-container">
     <igx-drop-down-item *ngFor="let item of items">
-        {{ item }}
+        <button class="currencyItem" (click)="changeBaseCurr(item)" >{{ item }}</button> 
     </igx-drop-down-item>
     </div>
 </igx-drop-down>
+
+
+
+   
+<button igxButton="contained"
+[igxToggleAction]="dropdown2" >
+Target Currency
+</button>
+<igx-drop-down #dropdown2 [width]="'240px'">
+    <div class="drop-down__scroll-container">
+    <igx-drop-down-item *ngFor="let item of items">
+        <button class="currencyItem" (click)="changeTargetCurr(item)" >{{ item }}</button> 
+    </igx-drop-down-item>
+    </div>
+</igx-drop-down>
+    
+
+  
+
+
 

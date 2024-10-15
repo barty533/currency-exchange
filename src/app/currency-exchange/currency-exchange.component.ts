@@ -12,14 +12,26 @@ import { CommonModule, NgFor} from '@angular/common';
 })
 export class CurrencyExchangeComponent implements OnInit {
   private dataDisplay = inject(DataDisplayComponent);
-  ngOnInit(): void 
-  {
-    this.dataDisplay.fetchData();
-    let currencies = Object.keys(this.dataDisplay.data.conversion_rates); 
-    this.items = currencies;
-    console.log(this.dataDisplay.baseCurrency)
-   
-  }
   public items: Array<string> = [];
   baseCurrency: any;
+  element: any;
+  ngOnInit(): void 
+  {
+    
+    this.dataDisplay.fetchData("PLN");
+    let currencies = Object.keys(this.dataDisplay.data.conversion_rates || {}); 
+    this.items = currencies;
+    
+  }
+
+  public changeBaseCurr(element: any){
+    this.dataDisplay.fetchData(element);
+  }
+  
+  public changeTargetCurr(element: any){
+
+  }
+
+
+  
 }
