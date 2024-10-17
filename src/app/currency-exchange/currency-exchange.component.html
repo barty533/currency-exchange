@@ -28,7 +28,12 @@ Target Currency
 </igx-drop-down>
     
 
+<form [formGroup]="registrationForm">
+    <igx-input-group>
+        <label igxLabel for="amount">amount</label>
+        <input igxInput name="amount" type="number" formControlName="amount" />
+    </igx-input-group>
  <button class="exchangeBtn" (click)="Exchange()">Exchange</button> 
-
+</form>
 
 

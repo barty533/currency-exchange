@@ -1,26 +1,37 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, NgModule } from '@angular/core';
 import { DataDisplayComponent } from '../data-display/data-display.component';
-import { IGX_DROP_DOWN_DIRECTIVES, IgxToggleActionDirective, IgxButtonDirective} from 'igniteui-angular';
-import { FormsModule } from '@angular/forms';
+import { IGX_DROP_DOWN_DIRECTIVES, IgxToggleActionDirective, IgxButtonDirective, IgxInputGroupModule} from 'igniteui-angular';
+import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Form } from '@angular/forms';
 import { CommonModule, NgFor} from '@angular/common';
-import e from 'express';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from '../app.component';
+import { Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-currency-exchange',
   standalone: true,
-  imports: [CommonModule, IGX_DROP_DOWN_DIRECTIVES, IgxToggleActionDirective, IgxButtonDirective],
+  imports: [CommonModule, IGX_DROP_DOWN_DIRECTIVES, 
+    IgxToggleActionDirective, IgxButtonDirective,
+    FormsModule,
+    IgxInputGroupModule, ReactiveFormsModule],
   templateUrl: './currency-exchange.component.html',
   styleUrl: './currency-exchange.component.css'
 })
+//_____________________________________________________
+
 export class CurrencyExchangeComponent implements OnInit {
+
   private dataDisplay = inject(DataDisplayComponent);
   public items: Array<string> = [];
   baseCurrency: any;
   element: any;
-  targetCurr: any;
+  CurrId: any;
   targetCurrency: any;
-  x: any;
+  amountComp : any;
+  amountForm : any;
+  registrationForm;
 
-  
+
   ngOnInit(): void 
   {
     
@@ -36,26 +47,36 @@ export class CurrencyExchangeComponent implements OnInit {
     
     this.dataDisplay.fetchData(element);
     setTimeout(() => {
-      this.changeTargetCurr(this.targetCurr);
+      this.changeTargetCurr(this.CurrId);
     }, 150);
    
   }
   
-  public changeTargetCurr(targetCurr: any){
+  public changeTargetCurr(CurrId: any){
     
-    let targetCurrency = this.dataDisplay.data.conversion_rates[targetCurr];
+    let targetCurrency = this.dataDisplay.data.conversion_rates[CurrId];
     this.targetCurrency = targetCurrency;
-    this.targetCurr=targetCurr;
+    this.CurrId=CurrId;
     console.log(targetCurrency);
-    console.log(targetCurr)
+    console.log(CurrId)
   }
 
+
+
   public Exchange(){
-    let amount = 5;
-    let exchange = amount * this.targetCurrency;
+    let amountComp = this.amount?.value || 1;
+
+    let exchange = amountComp * this.targetCurrency;
     console.log(exchange);
   }
 
-
-  
+  constructor(fb: FormBuilder) {
+    this.registrationForm = fb.group({
+        amount: [1, { nonNullable: true, validators: [Validators.required] }]
+    });
+}
+public get amount() {
+  return this.registrationForm.get('amount');
+}
+ 
 }
