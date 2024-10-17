@@ -26,9 +26,8 @@ export class DataDisplayComponent {
   public fetchData(x: string){
     this.baseCurrency = x;
     this.httpClient
-    .get(`https://v6.exchangerate-api.com/v6/4a1002a8dd6dc26134f653ce/latest/${this.baseCurrency}`)
+    .get(`https://v6.exchangerate-api.com/v6/43a2f1eab64bc6d03082e443/latest/${this.baseCurrency}`)
     .subscribe((data: any)=>{
-      console.log(data);
       this.data = data;  
     });}
 
