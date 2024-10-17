@@ -31,7 +31,7 @@ export class DataDisplayComponent {
       this.data = data;  
     });}
 
-    
+  
 
 
 }

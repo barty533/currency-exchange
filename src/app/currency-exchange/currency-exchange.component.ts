@@ -24,41 +24,44 @@ export class CurrencyExchangeComponent implements OnInit {
   private dataDisplay = inject(DataDisplayComponent);
   public items: Array<string> = [];
   baseCurrency: any;
-  element: any;
-  CurrId: any;
+  BaseCurrId: any;
+  TargetCurrId: any;
   targetCurrency: any;
   amountComp : any;
   amountForm : any;
   registrationForm;
 
 
+
   ngOnInit(): void 
   {
     
-    this.dataDisplay.fetchData("PLN");
-    
+    this.changeBaseCurr('PLN')
+    this.changeTargetCurr('USD');
     let currencies = Object.keys(this.dataDisplay.data.conversion_rates || {}); 
     this.items = currencies;
    
     
   }
 
-  public changeBaseCurr(element: any){
+  public changeBaseCurr(BaseCurrId: any){
     
-    this.dataDisplay.fetchData(element);
+    this.dataDisplay.fetchData(BaseCurrId);
+    this.BaseCurrId = BaseCurrId
+    
     setTimeout(() => {
-      this.changeTargetCurr(this.CurrId);
-    }, 150);
+      this.changeTargetCurr(this.TargetCurrId);
+    }, 300);
    
   }
   
-  public changeTargetCurr(CurrId: any){
+  public changeTargetCurr(TargetCurrId: any){
     
-    let targetCurrency = this.dataDisplay.data.conversion_rates[CurrId];
+    let targetCurrency = this.dataDisplay.data.conversion_rates[TargetCurrId];
     this.targetCurrency = targetCurrency;
-    this.CurrId=CurrId;
+    this.TargetCurrId=TargetCurrId;
     console.log(targetCurrency);
-    console.log(CurrId)
+    console.log(TargetCurrId)
   }
 
 
@@ -67,16 +70,27 @@ export class CurrencyExchangeComponent implements OnInit {
     let amountComp = this.amount?.value || 1;
 
     let exchange = amountComp * this.targetCurrency;
-    console.log(exchange);
+    const container = document.querySelector(".exchangeResult")
+    const div = document.createElement("div");
+    container?.replaceChildren();
+    div.textContent = `${exchange.toFixed(2)} ${this.TargetCurrId}`;
+    container?.append(div);
   }
 
   constructor(fb: FormBuilder) {
     this.registrationForm = fb.group({
-        amount: [1, { nonNullable: true, validators: [Validators.required] }]
+        amount: [1, { nonNullable: true, validators: [Validators.required] }],
+        exchange: [1, { nonNullable: true, validators: [Validators.required] }]
     });
 }
 public get amount() {
   return this.registrationForm.get('amount');
 }
  
+public switchCurr(){
+  let baseCurrTemp = this.BaseCurrId;
+  this.changeBaseCurr(this.TargetCurrId)
+  this.changeTargetCurr(baseCurrTemp)
+}
+
 }

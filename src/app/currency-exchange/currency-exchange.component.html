@@ -2,38 +2,43 @@
 <button igxButton="contained" 
         [igxToggleAction]="dropdown" 
         [igxDropDownItemNavigation]="dropdown">
-        Base Currency
+        {{BaseCurrId}}
 </button>
 <igx-drop-down #dropdown [width]="'240px'">
     <div class="drop-down__scroll-container">
     <igx-drop-down-item *ngFor="let item of items">
-        <button class="currencyItem" (click)="changeBaseCurr(item)" >{{ item }}</button> 
+        <div class="currencyItem" (click)="changeBaseCurr(item)" >{{ item }}</div> 
     </igx-drop-down-item>
     </div>
 </igx-drop-down>
 
 
-
+<button class="switch" (click)="switchCurr()">placeholder</button>
    
 <button igxButton="contained"
-[igxToggleAction]="dropdown2" >
-Target Currency
+[igxToggleAction]="dropdown2">
+{{TargetCurrId}}
 </button>
 <igx-drop-down #dropdown2 [width]="'240px'">
     <div class="drop-down__scroll-container">
     <igx-drop-down-item *ngFor="let item of items">
-        <button class="currencyItem" (click)="changeTargetCurr(item)" >{{ item }}</button> 
+        <div  class="currencyItem" (click)="changeTargetCurr(item)" >{{ item }}</div> 
     </igx-drop-down-item>
     </div>
 </igx-drop-down>
+
+<div class="targetCurrValue">{{targetCurrency}}</div>
     
 
-<form [formGroup]="registrationForm">
+<form [formGroup]="registrationForm" class="formContainer">
     <igx-input-group>
         <label igxLabel for="amount">amount</label>
         <input igxInput name="amount" type="number" formControlName="amount" />
     </igx-input-group>
- <button class="exchangeBtn" (click)="Exchange()">Exchange</button> 
-</form>
 
+ <button igxButton="contained" class="exchangeBtn" (click)="Exchange()">Exchange</button> 
+
+<div class="exchangeResult"></div>
+
+</form>
 
