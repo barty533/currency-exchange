@@ -1,0 +1,9 @@
+app-currency-exchange{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(#C20114, #6D7275);
+  height: 100vh;
+  padding-bottom: 200px;
+  
+}

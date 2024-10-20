@@ -1,13 +1,87 @@
+
+
+.mainContainer{
+   display: flex;
+   background-color: #C7D6D5;
+   height: 200px;
+   width: 600px;
+   justify-content: center;
+   align-content: center;
+   padding: 40px;
+   padding-block: 60px;
+   gap: 50px;
+   border-radius: 10px;
+   
+
+}
+.leftSide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+.rightSide{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+
+}
 .drop-down__scroll-container {
 
      height: 200px;
+     
      overflow: auto;
+ }
+
+ .switch{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+ }
+
+ .arrows{
+    margin-inline: -20px;
+    z-index: +1;
+    position: relative;
+    border: black;
+    border-width: 2px;
+ }
+
+
+ .curBtn{
+    display: flex;
+    
+    flex-direction: column;
+    background-color: #6D7275;
+    height: 50px;
+    width: 100px;
+    gap: 5px;
+ }
+
+ #exchangeBtn{
+    background-color: #C20114;
+ }
+
+ .input{
+    color: #C20114;
+    
+    
+    
+ }
+
+ .btnTag{
+    font-weight: lighter;
+    font-size: 11px;
  }
  .igx-overlay{
      height: 20px;
  }
 
-.currencyItem{
-    
-    width: 300px;
-}

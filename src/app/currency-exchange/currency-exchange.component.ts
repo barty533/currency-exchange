@@ -30,18 +30,16 @@ export class CurrencyExchangeComponent implements OnInit {
   amountComp : any;
   amountForm : any;
   registrationForm;
-
+  exchange: any;
 
 
   ngOnInit(): void 
   {
     
-    this.changeBaseCurr('PLN')
-    this.changeTargetCurr('USD');
+    this.changeBaseCurr('PLN');
+    this.TargetCurrId= "USD";
     let currencies = Object.keys(this.dataDisplay.data.conversion_rates || {}); 
-    this.items = currencies;
-   
-    
+    this.items = currencies;    
   }
 
   public changeBaseCurr(BaseCurrId: any){
@@ -51,36 +49,33 @@ export class CurrencyExchangeComponent implements OnInit {
     
     setTimeout(() => {
       this.changeTargetCurr(this.TargetCurrId);
+     
     }, 300);
+
+
    
   }
   
-  public changeTargetCurr(TargetCurrId: any){
-    
-    let targetCurrency = this.dataDisplay.data.conversion_rates[TargetCurrId];
+  public changeTargetCurr(TargetCurrId: any ){
+
+    let targetCurrency = this.dataDisplay.data.conversion_rates[TargetCurrId] ;
     this.targetCurrency = targetCurrency;
     this.TargetCurrId=TargetCurrId;
     console.log(targetCurrency);
-    console.log(TargetCurrId)
+    console.log(TargetCurrId);
+
   }
 
-
-
-  public Exchange(){
-    let amountComp = this.amount?.value || 1;
-
-    let exchange = amountComp * this.targetCurrency;
-    const container = document.querySelector(".exchangeResult")
-    const div = document.createElement("div");
-    container?.replaceChildren();
-    div.textContent = `${exchange.toFixed(2)} ${this.TargetCurrId}`;
-    container?.append(div);
+  public showDiv(){
+    document.getElementById('exchangeResult')!.style.display = "block";
+    document.getElementById("exchangeBtn")!.remove();
+    
   }
 
   constructor(fb: FormBuilder) {
     this.registrationForm = fb.group({
         amount: [1, { nonNullable: true, validators: [Validators.required] }],
-        exchange: [1, { nonNullable: true, validators: [Validators.required] }]
+        
     });
 }
 public get amount() {
@@ -88,9 +83,13 @@ public get amount() {
 }
  
 public switchCurr(){
+  
   let baseCurrTemp = this.BaseCurrId;
   this.changeBaseCurr(this.TargetCurrId)
   this.changeTargetCurr(baseCurrTemp)
+
 }
+
+
 
 }

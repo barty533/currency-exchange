@@ -1,44 +1,54 @@
 
+<div class="mainContainer">
+    <div class="leftSide">
 <button igxButton="contained" 
         [igxToggleAction]="dropdown" 
-        [igxDropDownItemNavigation]="dropdown">
-        {{BaseCurrId}}
+        [igxDropDownItemNavigation]="dropdown"
+        class="curBtn">
+       <div class="btnTag"> from: </div>{{BaseCurrId}}
 </button>
-<igx-drop-down #dropdown [width]="'240px'">
+<igx-drop-down #dropdown [width]="'50px'">
     <div class="drop-down__scroll-container">
-    <igx-drop-down-item *ngFor="let item of items">
-        <div class="currencyItem" (click)="changeBaseCurr(item)" >{{ item }}</div> 
+    <igx-drop-down-item *ngFor="let item of items" (click)="changeBaseCurr(item)">
+        <div class="currencyItem">{{ item }}</div> 
     </igx-drop-down-item>
     </div>
 </igx-drop-down>
 
 
-<button class="switch" (click)="switchCurr()">placeholder</button>
+<button class="switch" (click)="switchCurr()"><svg xmlns="http://www.w3.org/2000/svg" class="arrows" height="30px" viewBox="0 -960 960 960" width="70px" fill="#0C120C"><path d="M280-120 80-320l200-200 57 56-104 104h607v80H233l104 104-57 56Zm400-320-57-56 104-104H120v-80h607L623-784l57-56 200 200-200 200Z"/></svg></button>
    
+
 <button igxButton="contained"
-[igxToggleAction]="dropdown2">
-{{TargetCurrId}}
+[igxToggleAction]="dropdown2"
+class="curBtn">
+<div class="btnTag">to:</div> {{TargetCurrId}}
 </button>
-<igx-drop-down #dropdown2 [width]="'240px'">
+<igx-drop-down #dropdown2 [width]="'50px'">
     <div class="drop-down__scroll-container">
-    <igx-drop-down-item *ngFor="let item of items">
-        <div  class="currencyItem" (click)="changeTargetCurr(item)" >{{ item }}</div> 
+    <igx-drop-down-item *ngFor="let item of items" (click)="changeTargetCurr(item)">
+        <div  class="currencyItem">{{ item }}</div> 
     </igx-drop-down-item>
     </div>
 </igx-drop-down>
-
-<div class="targetCurrValue">{{targetCurrency}}</div>
-    
-
+</div>
+<div class="rightSide">
 <form [formGroup]="registrationForm" class="formContainer">
-    <igx-input-group>
-        <label igxLabel for="amount">amount</label>
+    <igx-input-group class="input">
+        <label igxLabel for="amount">Amount</label>
         <input igxInput name="amount" type="number" formControlName="amount" />
     </igx-input-group>
 
- <button igxButton="contained" class="exchangeBtn" (click)="Exchange()">Exchange</button> 
+ <button igxButton="contained" id="exchangeBtn" (click)="showDiv()">Exchange</button> 
 
-<div class="exchangeResult"></div>
 
+    <div id="exchangeResult" style="display: none;">
+        @if (targetCurrency == 1) {
+        <div></div>}
+        @else{ <div>{{(this.amount?.value!*this.targetCurrency)}} {{TargetCurrId}}</div>
+        }
+        <div class="1curr">1 {{BaseCurrId}} = {{targetCurrency}} {{TargetCurrId}}</div>    
+    </div>    
 </form>
-
+</div>
+</div>

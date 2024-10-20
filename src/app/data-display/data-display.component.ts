@@ -23,7 +23,7 @@ export class DataDisplayComponent {
   selectedCurrency: any;
   
 
-  public fetchData(x: string){
+   fetchData(x: string){
     this.baseCurrency = x;
     this.httpClient
     .get(`https://v6.exchangerate-api.com/v6/43a2f1eab64bc6d03082e443/latest/${this.baseCurrency}`)
